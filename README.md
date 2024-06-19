@@ -9,10 +9,24 @@ Either include the `index.js` in a `<script></script>` or use
 `<script src="./index.js"></script>` to have access to the `KittyCADClient`
 class.
 
+You need a video element too:
+
+```
+<video id="stream" src=""/>
+```
+
+Remember to select the element with JS and pass it to KittyCADClient.
+
+```
+const streamEl = document.getElementById("stream");
+KittyCADClient("API Token", streamEl, ...)
+```
+
+
 Initializating and usage is easy:
 
 ```
-  KittyCADClient("API TOKEN", () => {
+  KittyCADClient("API TOKEN", streamEl, () => {
     // You can now use any modeling command here!
     // Check the documentation for what's available:
     // https://zoo.dev/docs/api/modeling/open-a-websocket-which-accepts-modeling-commands?lang=rust#parameters-body-modeling_cmd_req-cmd

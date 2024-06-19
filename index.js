@@ -59,7 +59,7 @@ for (const command of commands) {
 // Allows for doing this like start_path(), extend_path(), etc.
 Object.assign(window, cmds);
 
-const KittyCADClient = (sessionKey, fnCmds) => {
+const KittyCADClient = (sessionKey, streamEl, fnCmds) => {
   const queue = [];
   const modeling_cmd_batch_req = (args) => {
     let requests = [];
