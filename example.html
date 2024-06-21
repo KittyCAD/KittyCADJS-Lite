@@ -1,0 +1,63 @@
+<head>
+<script src="index.js"></script>
+</head>
+<body>
+demo
+<button onclick="connect()">execute</button>
+<video id="stream"></video>
+<script>
+  function connect() {
+    const stream = document.getElementById("stream");
+    KittyCADClient("dev.zoo.dev", "f8864550-84a6-4a06-8d3f-68d29bbe5608", stream, () => {
+      default_camera_zoom({ magnitude: -25 });
+      default_camera_look_at({
+        center: { x: 0, y: 0, z: 0 },
+        up: { x: 0, y: 0, z: 1 },
+        vantage: { x: 0, y: -100, z: 75 },
+      });
+      const plane_id = make_plane({
+        clobber: false,
+        hide: true,
+        origin: { x: 0, y: 0, z: 0 },
+        size:  1,
+        x_axis: {x: 1, y: 0, z: 0},
+        y_axis: {x: 0, y: 1, z: 0},
+      });
+      enable_sketch_mode({
+        entity_id: plane_id,
+        ortho: false,
+        animated: false,
+        adjust_camera: false,
+      });
+      const path = start_path();
+      move_path_pen({ path, to: { x: 0, y: 0, z: 0 }});
+      extend_path({
+        path,
+        segment: {
+          type: "line",
+          end: { x: 10, y: 0, z: 0 },
+          relative: false,
+        }
+      });
+      extend_path({
+        path,
+        segment: {
+          type: "line",
+          end: { x: 10, y: 10, z: 0 },
+          relative: false,
+        }
+      });
+      extend_path({
+        path,
+        segment: {
+          type: "line",
+          end: { x: 0, y: 10, z: 0 },
+          relative: false,
+        }
+      });
+      close_path({ path_id: path });
+      sketch_mode_disable();
+    });
+  }
+</script>
+</body>

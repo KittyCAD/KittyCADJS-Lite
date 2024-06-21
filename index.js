@@ -43,7 +43,7 @@ for (const command of commands) {
         type: command,
         ...args
       },
-      cmd_id: uuidV4(),
+      cmd_id: uuidv4(),
       type: "modeling_cmd_req"
     };
 
@@ -59,7 +59,7 @@ for (const command of commands) {
 // Allows for doing this like start_path(), extend_path(), etc.
 Object.assign(window, cmds);
 
-const KittyCADClient = (sessionKey, streamEl, fnCmds) => {
+const KittyCADClient = (DOMAIN, sessionKey, streamEl, fnCmds) => {
   const queue = [];
   const modeling_cmd_batch_req = (args) => {
     let requests = [];
@@ -206,7 +206,7 @@ const KittyCADClient = (sessionKey, streamEl, fnCmds) => {
     //fs.writeFileSync(file.name, file.contents.read(0, file.contents.length));
   };
 
-  const url = `wss://api${DOMAIN}/ws/modeling/commands?video_res_width=348&video_res_height=272`;
+  const url = `wss://api.${DOMAIN}/ws/modeling/commands?video_res_width=348&video_res_height=272`;
   ws = new WebSocket(url, []);
   ws.binaryType = "arraybuffer";
 
@@ -215,7 +215,7 @@ const KittyCADClient = (sessionKey, streamEl, fnCmds) => {
   ws.addEventListener("open", () => {
     // Used for development / testing other session keys
     if (sessionKey) {
-      send({ headers: { Authorization: `Bearer ${sessionKey}` } })
+      send({ type: "headers", headers: { Authorization: `Bearer ${sessionKey}` } })
     }
   });
   ws.addEventListener("close", (e) => console.log("close", e));
