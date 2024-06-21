@@ -19,14 +19,14 @@ Remember to select the element with JS and pass it to KittyCADClient.
 
 ```
 const streamEl = document.getElementById("stream");
-KittyCADClient("API Token", streamEl, ...)
+KittyCADClient("zoo.dev", "API Token", streamEl, ...)
 ```
 
 
 Initializating and usage is easy:
 
 ```
-  KittyCADClient("API TOKEN", streamEl, () => {
+  KittyCADClient("zoo.dev", "API TOKEN", streamEl, () => {
     // You can now use any modeling command here!
     // Check the documentation for what's available:
     // https://zoo.dev/docs/api/modeling/open-a-websocket-which-accepts-modeling-commands?lang=rust#parameters-body-modeling_cmd_req-cmd
